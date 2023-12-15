@@ -11,3 +11,31 @@ SELENIUM_VERSION=4.7.1 npm test
 
 You can select any version you have downloaded.
 
+## Perquisites
+
+You need the following software (in parentheses my versions in case you want to reproduce the bug)
+
+- Java (openjdk 17.0.2)
+- Node.js (v18.15.0)
+- Firefox (12.0.1)
+- and a Selenium standalone server jar
+
+## Bug report
+
+It seems as if versions of the standalone server up to (including) 4.8.1 are working.
+Version 4.8.2 and newer (including 4.16.1) are not working.
+
+To reproduce this bug report, download version [4.8.1](https://github.com/SeleniumHQ/selenium/releases/download/selenium-4.8.0/selenium-server-4.8.1.jar) and [4.8.2](https://github.com/SeleniumHQ/selenium/releases/download/selenium-4.8.0/selenium-server-4.8.2.jar), put hte files in the jars folder of the project and run
+
+   ```
+   SELENIUM_VERSION=4.8.1 npm test
+   ```
+
+and
+
+   ```
+   SELENIUM_VERSION=4.8.2 npm test
+   ```
+
+Be careful when running the tests. On macos, you probably need to allow execution of the jar and maybe other settings. Keep an eye on the activity monitor for java processes and firefox instances.
+
