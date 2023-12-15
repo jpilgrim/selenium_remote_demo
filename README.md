@@ -49,3 +49,5 @@ and
 Be careful when running the tests. On macos, you probably need to allow execution of the jar and maybe other settings. Keep an eye on the activity monitor for java processes and firefox instances.
 
 The first one (4.8.1) should work, the second one (4.8.2) fails.
+
+Bug reported as [#13318](https://github.com/SeleniumHQ/selenium/issues/13318).
