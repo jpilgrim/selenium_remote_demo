@@ -1,0 +1,10 @@
+{
+  "name": "selenium_remote",
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "selenium-webdriver": "^4.16.0",
+    "jest": "^29.7.0"
+  }
+}
