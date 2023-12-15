@@ -6,6 +6,14 @@ const webdriver = require("selenium-webdriver");
 const version = process.env.SELENIUM_VERSION || "4.7.1";
 let seleniumServer;
 
+// cf. https://www.selenium.dev/documentation/webdriver/troubleshooting/logging/
+// but has no effect:
+const logging = require('selenium-webdriver/lib/logging')
+logger = logging.getLogger('webdriver')
+logger.setLevel(logging.Level.ALL)
+logging.installConsoleHandler()
+
+
 beforeAll(async () => {
     const jarPath = path.resolve('jars/selenium-server-' + version + '.jar');
     console.log(`Load selenium server, version ${version}`)
@@ -15,8 +23,8 @@ beforeAll(async () => {
         port: 4444,
         env: {
             ...process.env,
-            "SE_NODE_MAX_SESSIONS": "4",
-            "SE_NODE_OVERRIDE_MAX_SESSIONS": "true"
+            // "SE_NODE_MAX_SESSIONS": "4",
+            // "SE_NODE_OVERRIDE_MAX_SESSIONS": "true"
         }
     });
     const address = await seleniumServer.start(5000);
