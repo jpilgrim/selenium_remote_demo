@@ -27,7 +27,7 @@ beforeAll(async () => {
             // "SE_NODE_OVERRIDE_MAX_SESSIONS": "true"
         }
     });
-    const address = await seleniumServer.start(5000);
+    const address = await seleniumServer.start(8000);
     console.timeEnd("Starting Server");
     console.log(`Selenium server started at ${address}`);
 
@@ -40,13 +40,16 @@ afterAll(async () => {
 
 test(`Selenium server ${version}`, async () => {
     // start remote firefox and retrieve driver
-    const options = new firefox.Options().headless();
+    const options = new firefox.Options();
+    // options.headless(); -- headless() is deprecated and should not be used.
+    // instead, argument "--headless" should be passed to the browser:
+    options.addArguments("-headless"); // but it does not fix the problem...
     options.setAcceptInsecureCerts(true);
     console.time("Starting (Remote) Firefox")
     const driver = await new webdriver.Builder()
         .forBrowser('firefox')
         .usingServer("http://127.0.0.1:4444/wd/hub")
-        .withCapabilities(webdriver.Capabilities.firefox())
+        // .withCapabilities(webdriver.Capabilities.firefox()) // redundant, only use options:
         .setFirefoxOptions(options)
         .build();
     console.timeEnd("Starting (Remote) Firefox")
