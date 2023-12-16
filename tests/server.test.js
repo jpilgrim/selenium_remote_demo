@@ -6,11 +6,13 @@ const webdriver = require("selenium-webdriver");
 const version = process.env.SELENIUM_VERSION || "4.7.1";
 let seleniumServer;
 
-// cf. https://www.selenium.dev/documentation/webdriver/troubleshooting/logging/
 // but has no effect:
 const logging = require('selenium-webdriver/lib/logging')
-logger = logging.getLogger('webdriver')
-logger.setLevel(logging.Level.ALL)
+// from selenium-webdriver/examples/logging.js:
+logging.getLogger(`${logging.Type.DRIVER}.http`).setLevel(logging.Level.ALL)
+// from https://www.selenium.dev/documentation/webdriver/troubleshooting/logging/
+// has no effect:
+// logging.getLogger('webdriver').setLevel(logging.Level.ALL)
 logging.installConsoleHandler()
 
 
@@ -41,7 +43,8 @@ afterAll(async () => {
 test(`Selenium server ${version}`, async () => {
     // start remote firefox and retrieve driver
     const options = new firefox.Options();
-    // options.headless(); -- headless() is deprecated and should not be used.
+    // options.setBinary(firefox.Channel.RELEASE); // from firefox_channels.js example, does not fix the problem
+    // options.headless(); // -- headless() is deprecated and should not be used.
     // instead, argument "--headless" should be passed to the browser:
     options.addArguments("-headless"); // but it does not fix the problem...
     options.setAcceptInsecureCerts(true);

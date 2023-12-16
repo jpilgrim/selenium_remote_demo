@@ -4,7 +4,8 @@
     "test": "jest"
   },
   "dependencies": {
-    "selenium-webdriver": "^4.16.0",
-    "jest": "^29.7.0"
+    "geckodriver": "^4.3.0",
+    "jest": "^29.7.0",
+    "selenium-webdriver": "^4.16.0"
   }
 }

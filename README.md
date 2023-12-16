@@ -51,3 +51,16 @@ Be careful when running the tests. On macos, you probably need to allow executio
 The first one (4.8.1) should work, the second one (4.8.2) fails.
 
 Bug reported as [#13318](https://github.com/SeleniumHQ/selenium/issues/13318).
+
+### Solution
+
+The selenium grid in version 4.8.2 (and higher) need the geckodriver to be installed explicitly. In version 4.8.1 (and below) that was not necessary.
+So, 
+
+```
+npm i geckodriver
+```
+
+solves the problem.
+
+Also have a look at how to activate selenium logging in the test.
