@@ -3,7 +3,7 @@ const remote = require("selenium-webdriver/remote");
 const firefox = require("selenium-webdriver/firefox");
 const webdriver = require("selenium-webdriver");
 
-const version = process.env.SELENIUM_VERSION || "4.7.1";
+const version = process.env.SELENIUM_VERSION || "4.16.1";
 let seleniumServer;
 
 // but has no effect:
@@ -25,11 +25,10 @@ beforeAll(async () => {
         port: 4444,
         env: {
             ...process.env,
-            // "SE_NODE_MAX_SESSIONS": "4",
-            // "SE_NODE_OVERRIDE_MAX_SESSIONS": "true"
-        }
+        },
+        args: ['--selenium-manager', 'true']
     });
-    const address = await seleniumServer.start(8000);
+    const address = await seleniumServer.start(120000);
     console.timeEnd("Starting Server");
     console.log(`Selenium server started at ${address}`);
 
